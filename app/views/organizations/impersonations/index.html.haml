@@ -1,0 +1,34 @@
+= render layout: 'organizations/orgadmin_layout' do
+  .card
+    .card-body
+      %h1 Impersonations
+      = form_tag organization_impersonations_path(@organization), method: :get, remote: true, class: "filtering" do
+        .form-row
+          .form-group.col-lg-3
+            = label_tag :search, "Search by"
+            = select_tag :search, options_for_select(@search_field_options.map { |option| [option.titleize, option] }),
+                                  class: "form-control form-control-sm"
+          .form-group.col-lg-4
+            = label_tag :q, "Search text"
+            = text_field_tag :q, params[:q], autocomplete: "off", placeholder: "Start typing a word...",
+                                             class: "form-control form-control-sm"
+        .form-row
+          .form-group.col-lg-3
+            = label_tag :created_at_beginning, "Started after"
+            = date_field_tag :created_at_beginning, nil, class: "form-control form-control-sm"
+          .form-group.col-lg-3
+            = label_tag :created_at_endind, "Started before"
+            = date_field_tag :created_at_ending, nil, class: "form-control form-control-sm"
+          .form-group.col-lg-3
+            = label_tag :ended_at_beginning, "Ended after"
+            = date_field_tag :ended_at_beginning, nil, class: "form-control form-control-sm"
+          .form-group.col-lg-3
+            = label_tag :ended_at_ending, "Ended before"
+            = date_field_tag :ended_at_ending, nil, class: "form-control form-control-sm"
+        .sorting-hidden-fields
+          = render 'shared/sorting_hidden_fields'
+        = submit_tag "Apply filters", name: nil, class: "btn btn-sm btn-primary"
+        = link_to "Reset filters", organization_impersonations_path(@organization), class: "btn btn-sm btn-secondary"
+
+      .impersonations-list
+        = render 'impersonations_list'

@@ -1,0 +1,22 @@
+.row
+  .col-lg-12.mx-auto
+    %ul.list-group
+      %li.list-group-item
+        Check this user answers to questions from your courses:
+      - if @review_requests.empty?
+        %li.list-group-item
+          Nothing here :-(
+      - @review_requests.each do |request|
+        %li.list-group-item{id: "rewiew-request-#{request.id}" }
+          %p= request.user_answer.question.text
+          %p= "Answer: #{request.user_answer.text}"
+          .row
+            .col-lg-6
+              = link_to(review_request_path(request, correct: true), method: :delete, remote: true, class: "delete") do
+                %button.btn.btn-outline-success.btn-sm.btn-block{type: "button"} Correct :)
+            .col-lg-6
+              = link_to(review_request_path(request, correct: false), method: :delete, remote: true, class: "delete") do
+                %button.btn.btn-outline-warning.btn-sm.btn-block{type: "button"} Uncorrect :(
+= javascript_pack_tag('review_requests')
+
+              

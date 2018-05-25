@@ -1,0 +1,12 @@
+= render layout: 'organizations/orgadmin_layout' do
+  .card
+    .card-body
+      %h1 Reports
+      %p Statistics on all courses of the organization passed by users of the organization (%):
+      .chart-container.mx-auto{style: "position: relative; height: 260px; width: 500px;"}
+        %canvas#pieChart
+        = content_tag(:div, nil, {id: "pieData", data: @chart})
+      %h2 Courses:
+      .courses-list
+        = render 'courses_list'
+= javascript_pack_tag('reports')

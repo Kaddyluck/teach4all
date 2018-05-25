@@ -1,0 +1,9 @@
+.card.my-1
+  .card-body
+    %h3.card-title
+      = link_to course.name, course_path(course)
+    .float-right
+      Rating:
+      = course_rating_badge(course.average_rating)
+    %h6
+      = course_author(course)

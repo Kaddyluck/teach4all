@@ -1,0 +1,10 @@
+%tr
+  %td= course.name
+  %td= "@#{course.user.nickname}"
+  %td
+    - if course.organization
+      = course.organization.name
+  %td= full_time_string(course.passing_courses.find_by(user: current_user).updated_at)
+  %td= course_result_badge(course.passing_courses.find_by(user: current_user).result)
+  %td= course_rating_badge(course.ratings.find_by(user: current_user).try(:value) || 0)
+  %td= link_to "To course page", course_path(course), class: "btn btn-sm btn-outline-info"

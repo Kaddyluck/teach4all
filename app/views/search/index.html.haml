@@ -1,0 +1,14 @@
+.card
+  .card-body
+    .row.justify-content-center
+      .col-lg-8
+        %h1 Search courses
+        .filtering
+          = form_tag search_path, method: :get, class: "filtering" do
+            .input-group
+              = text_field_tag :query, params[:query], placeholder: "Start typing...", autocomplete: "off", class: "form-control"
+              .input-group-btn
+                = submit_tag "Search", class: "btn btn-outline-primary"
+        .search-results
+          = render 'results'
+= javascript_pack_tag 'filtering'

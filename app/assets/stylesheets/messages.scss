@@ -1,0 +1,45 @@
+.messages-list {
+  table {
+    table-layout: fixed;
+    th.message-user {
+      width: 25%
+    }
+    td.message-time {
+      width: 15%;
+    }
+    td.message-body {
+      width: 40%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    td.message-manipulation-link {
+      width: 15%;
+    }
+
+    .receipt-unread {
+      background-color: #efffea;
+      font-weight: bold;
+    }
+  }
+}
+
+#reply-form {
+  display: none;
+}
+
+.message-notifications {
+  position: fixed;
+  width: 25em;
+  bottom: 1em;
+  right: 1em;
+  opacity: 0.9;
+  .notification-body {
+    margin-left: 1em;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

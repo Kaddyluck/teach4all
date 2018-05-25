@@ -1,0 +1,21 @@
+.row
+  .col-lg-3
+    .list-group
+      = link_to organization_path(@organization), class: "list-group-item list-group-item-action #{active_class(organization_path(@organization))}" do
+        = fa_icon "work"
+        = content_tag :strong, @organization.name
+      = link_to organization_users_path(@organization), class: "list-group-item list-group-item-action #{active_class(organization_users_path(@organization))}" do
+        = fa_icon "users"
+        Users
+      = link_to organization_courses_path(@organization), class: "list-group-item list-group-item-action #{active_class(organization_courses_path(@organization))}" do
+        = fa_icon "graduation-cap"
+        Courses
+      = link_to organization_impersonations_path(@organization), class: "list-group-item list-group-item-action #{active_class(organization_impersonations_path(@organization))}" do
+        = fa_icon "user-secret"
+        Impersonations
+      = link_to organization_reports_path(@organization), class: "list-group-item list-group-item-action #{active_class(organization_reports_path(@organization))}" do
+        = fa_icon "pie-chart"
+        Reports
+  .col-lg-9
+    = yield
+= javascript_pack_tag 'filtering'

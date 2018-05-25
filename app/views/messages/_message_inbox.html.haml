@@ -1,0 +1,27 @@
+.card
+  .card-body
+    %h3
+      %em= "@#{messaging_user_attribute(receipt.sender, :nickname)}"
+      %span= messaging_user_attribute(receipt.sender, :first_name)
+      %span= messaging_user_attribute(receipt.sender, :last_name)
+      .float-right
+        - if @receipt.trashed?
+          = link_to "Restore", restore_message_path(receipt), method: :patch, class: 'btn btn-sm btn-outline-info'
+        - else
+          = link_to "Move to trash", message_path(receipt), method: :delete, class: 'btn btn-sm btn-outline-danger'
+    %h6= full_time_string(receipt.created_at)
+    %p= simple_format(receipt.message.body)
+    - if receipt.sender
+      = link_to "Reply", '#', class: "btn btn-outline-primary btn-block", id: "reply-button"
+
+#reply-form
+  .card
+    .card-body
+      = form_for @message_sending, url: messages_path do |f|
+        = f.hidden_field :receiver_ids, multiple: true
+
+        .form-group
+          = f.label :body, "Reply"
+          = f.text_area :body, autofocus: true, placeholder: "Write your reply" , class: "form-control"
+
+        = f.submit "Send", class: "btn btn-primary"

@@ -1,0 +1,17 @@
+.card
+  .card-body
+    = link_to course_certificate_path(certificate.course, certificate, user_id: @user.id), target: "_blank" do
+      = image_tag certificate.pdf.url(:icon)
+    %h2= link_to certificate.course.name, course_path(certificate.course)
+    %h6
+      - if certificate.course.organization
+        Course from
+        = link_to profile_organization_path(certificate.course.organization) do
+          %strong= certificate.course.organization.name
+      - else
+        Course created by
+        = link_to user_path(certificate.course.user) do
+          %strong= "@#{certificate.course.user.nickname}"
+    %h5
+      Passed at
+      %strong= certificate.created_at.strftime("%Y-%m-%d")

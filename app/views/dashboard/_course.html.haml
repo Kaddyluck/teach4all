@@ -1,0 +1,15 @@
+.card.border-primary
+  .card-body
+    %h5.card-title= link_to course.name, course_path(course)
+    = image_tag course.avatar.url(:thumb), class: "rounded float-left mr-3 mb-3"
+    .my-auto
+      %h6.card-title
+        = course_author(course)
+      - if type == :current
+        = render 'shared/progress_bar', progress: course.progress_for(current_user).truncate(2)
+      - if type == :passed
+        My result:
+        = course_result_badge(course.passing_courses.find_by(user: current_user).result)
+      - if type == :recommended
+        Rating:
+        = course_rating_badge(course.average_rating)

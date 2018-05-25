@@ -1,0 +1,10 @@
+%tr
+  %td= "@#{impersonation.target_user.nickname}"
+  %td= "@#{impersonation.impersonator.nickname}"
+  %td= full_time_string(impersonation.created_at)
+  %td= full_time_string(impersonation.ended_at)
+  %td
+    - if impersonation.ended_at
+      = distance_of_time_in_words(impersonation.ended_at, impersonation.created_at)
+    - else
+      = "-"

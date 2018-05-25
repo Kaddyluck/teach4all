@@ -1,0 +1,8 @@
+%tr
+  %td= course.name
+  %td= "@#{course.user.nickname}"
+  %td
+    - if course.organization
+      = course.organization.name
+  %td= render 'shared/progress_bar', progress: course.progress_for(current_user)
+  %td= link_to "Continue", passing_course_path(course), class: "btn btn-sm btn-outline-success"

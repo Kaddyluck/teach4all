@@ -1,0 +1,19 @@
+%tr{id: "message_#{receipt.id}", class: unread_receipt_class(receipt)}
+  %th.message-user
+    - case receipt.box
+    - when 'inbox'
+      %em= "@#{messaging_user_attribute(receipt.sender, :nickname)}"
+    - when 'sentbox'
+      To:
+      %em= "@#{messaging_user_attribute(receipt.receiver, :nickname)}"
+
+  %td.message-time.small= short_time_string(receipt.created_at)
+
+  %td.message-body= link_to receipt.message.body, message_path(receipt)
+
+  %td.message-manipulation-link
+    - if receipt.trashed?
+      = link_to "Restore", restore_message_path(receipt), method: :patch
+    - else
+      = link_to "Delete", message_path(receipt), method: :delete
+

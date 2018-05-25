@@ -1,0 +1,29 @@
+{
+  "name": "teach4all",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "^3.2.0",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap": "4.0.0-beta",
+    "chart.js": "^2.7.1",
+    "coffeescript": "1.12.7",
+    "draft-js": "^0.10.4",
+    "draftjs-to-html": "^0.8.2",
+    "html-to-draftjs": "^1.1.2",
+    "jquery": "^3.2.1",
+    "jquery-ujs": "^1.2.2",
+    "popper.js": "^1.12.9",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-draft-wysiwyg": "^1.12.3",
+    "react-flip-move": "^3.0.0",
+    "react-loading": "^1.0.3",
+    "react-rangeslider": "^2.2.0",
+    "reactstrap": "^5.0.0-alpha.4",
+    "select2": "^4.0.6-rc.1"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^2.9.7"
+  }
+}

@@ -1,0 +1,14 @@
+%tr
+  %td= user.nickname
+  %td= user.email
+  %td= user.first_name
+  %td= user.last_name
+  %td= user_status_label(user)
+  %td
+    - unless user.new_record?
+      = user.roles.find_by(organization: @organization).role
+  %td
+    - if policy(user).impersonate?
+      = link_to "Impersonate", impersonate_user_path(user), method: :patch, class: "badge badge-dark"
+    - else
+      = content_tag :span, "Impersonate", class: "badge badge-light"

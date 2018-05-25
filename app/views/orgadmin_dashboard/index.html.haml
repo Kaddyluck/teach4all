@@ -1,0 +1,12 @@
+.card
+  .card-body
+    %h1 OrgAdmin Dashboard
+    %h2 Organizations
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Sphere
+      %tbody
+        = render partial: 'organization', collection: @organizations

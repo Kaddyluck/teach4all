@@ -1,0 +1,22 @@
+= render layout: 'layout' do
+  .card
+    .card-body
+      %h1 New message
+      = form_for @message_sending, url: messages_path do |f|
+        - if f.object.errors.any?
+          .alert.alert-danger
+            %ul
+              - f.object.errors.full_messages.each do |msg|
+                %li= msg
+
+        .form-group
+          = f.label :receiver_ids, "To:"
+          = f.select(:receiver_ids,
+                      @selected_receivers.collect { |user| [user.nickname, user.id] },
+                     { include_hidden: false },
+                     { multiple: true, class: "select-receivers form-control" })
+        .form-group
+          = f.label :body, "Message text"
+          = f.text_area :body, autofocus: true, placeholder: "Write your message" , class: "form-control"
+
+        = f.submit "Send", class: "btn btn-primary"

@@ -1,0 +1,9 @@
+= render layout: 'dashboard/layout' do
+  %h1 Recommended courses
+  - if @recommended_courses.any?
+    = render 'dashboard/search_form', url: dashboard_courses_recommended_path
+    .recommended-courses-list
+      = render 'recommended_courses_list'
+  - else
+    .row.justify-content-center
+      %h5 No recommended courses

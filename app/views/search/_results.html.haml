@@ -1,0 +1,11 @@
+- if @results.total_count > 0
+  .row.justify-content-center.my-2
+    %h5
+      = pluralize(@results.total_count, "course")
+      found
+- else
+  .row.justify-content-center.my-2
+    %h5 Nothing found
+= render partial: 'result', collection: @results, as: :course
+.row.justify-content-center
+  = paginate @results, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

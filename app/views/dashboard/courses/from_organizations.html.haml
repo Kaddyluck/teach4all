@@ -1,0 +1,9 @@
+= render layout: 'dashboard/layout' do
+  %h1 Courses from organizations
+  - if @courses_from_organizations.any?
+    = render 'dashboard/search_form', url: dashboard_courses_from_organizations_path
+    .from-organizations-courses-list
+      = render 'from_organizations_courses_list'
+  - else
+    .row.justify-content-center
+      %h5 No courses from organizations

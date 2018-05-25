@@ -1,0 +1,21 @@
+.row.justify-content-center
+  .col-sm-10.col-md-10.col-lg-10
+    .card
+      .card-header
+        %h2
+          ="Add admins to #{@organization.name}"
+      .card-body
+        .row
+          .col-md-4
+            %p Choose user from userlist
+            = simple_form_for [@organization, Role.new] do |f|
+              .input-group
+                = f.select :user_id, (User.all - @organization.admins).map{ |u| [u.nickname, u.id]}, { include_blank: true }, class: "form-control form-control-sm select-users-to-admins"
+                = f.input_field :role, as: :hidden, value: 'org_admin'
+                .input-group-btn
+                  = f.button :submit, 'Add', class:"btn btn-secondary btn-sm"
+          .col-md-8
+            #admin_listing
+              = render 'users_listing', users: @users, organization: @organization, actions:"reset_access"
+= javascript_pack_tag 'pagination'
+= javascript_pack_tag 'select_users_to_admins'

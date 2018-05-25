@@ -1,0 +1,14 @@
+%table.table.table-sm.table-hover.mt-3
+  %thead
+    %tr.column-titles
+      %th= sortable(:nickname)
+      %th= sortable(:email)
+      %th= sortable(:first_name)
+      %th= sortable(:last_name)
+      %th Status
+      %th Role
+      %th
+  %tbody
+    = render partial: 'user', collection: @users
+.row.justify-content-center
+  = paginate @users, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

@@ -1,0 +1,20 @@
+%table.table.table-responsive.table-sm.table-hover.mt-3
+  %thead
+    %tr.column-titles
+      %th= sortable :name
+      %th= sortable :user, "Author"
+      %th= sortable :status
+      %th= sortable :visibility
+      %th= sortable :created_at, "Created"
+      %th= sortable :updated_at, "Updated"
+      %th Actions
+  %tbody
+    - if @courses.any?
+      = render partial: 'course', collection: @courses
+    - else
+      %tr
+        %td{colspan: 7}
+          .row.justify-content-center
+            Nothing found
+.row.justify-content-center
+  = paginate @courses, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

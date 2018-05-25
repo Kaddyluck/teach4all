@@ -1,0 +1,7 @@
+%span= "#{progress}% passed"
+.progress
+  .progress-bar{role: "progressbar",
+                :'aria-valuenow' => progress,
+                style: "width: #{progress}%",
+                :'aria-valuemin' => 0,
+                :'aria-valuemax' => 100}

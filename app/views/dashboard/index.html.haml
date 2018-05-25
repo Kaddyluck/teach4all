@@ -1,0 +1,66 @@
+= render layout: 'dashboard/layout' do
+  %h4= link_to "Current courses", dashboard_courses_current_path
+  - if @current_courses.any?
+    .card-columns
+      = render partial: 'dashboard/course',
+                collection: @current_courses,
+                as: :course,
+                locals: { type: :current }
+  - else
+    .row.justify-content-center
+      %h5 No current courses
+  %hr
+  %h4= link_to "Courses from organizations", dashboard_courses_from_organizations_path
+  - if @courses_from_organizations.any?
+    .card-columns
+      = render partial: 'dashboard/course',
+                collection: @courses_from_organizations,
+                as: :course,
+                locals: { type: :from_organization }
+  - else
+    .row.justify-content-center
+      %h5 No courses from organizations
+  %hr
+  %h4= link_to "Courses from users", dashboard_courses_from_users_path
+  - if @courses_from_users.any?
+    .card-columns
+      = render partial: 'dashboard/course',
+                collection: @courses_from_users,
+                as: :course,
+                locals: { type: :from_users }
+  - else
+    .row.justify-content-center
+      %h5 No courses from users
+  %hr
+  %h4= link_to "Starred courses", dashboard_courses_starred_path
+  - if @starred_courses.any?
+    .card-columns
+      = render partial: 'dashboard/course',
+                collection: @starred_courses,
+                as: :course,
+                locals: { type: :starred }
+  - else
+    .row.justify-content-center
+      %h5 No starred courses
+  %hr
+  %h4= link_to "Passed courses", dashboard_courses_passed_path
+  - if @passed_courses.any?
+    .card-columns
+      = render partial: 'dashboard/course',
+                collection: @passed_courses,
+                as: :course,
+                locals: { type: :passed }
+  - else
+    .row.justify-content-center
+      %h5 No passed courses
+  %hr
+  %h4= link_to "Recommended courses", dashboard_courses_recommended_path
+  - if @recommended_courses.any?
+    .card-columns
+      = render partial: 'dashboard/course',
+                collection: @recommended_courses,
+                as: :course,
+                locals: { type: :recommended }
+  - else
+    .row.justify-content-center
+      %h5 No recommended courses

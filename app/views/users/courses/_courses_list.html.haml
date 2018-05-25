@@ -1,0 +1,18 @@
+%table.table.table-sm.table-hover
+  %thead
+    %tr.column-titles
+      %th= sortable(:name)
+      %th= sortable(:organization)
+      %th= sortable(:updated_at, "Updated")
+      %th= sortable(:status)
+      %th Actions
+  %tbody
+    - if @courses.any?
+      = render partial: 'course', collection: @courses, as: :course
+    - else
+      %tr
+        %td{colspan: 5}
+          .row.justify-content-center
+            Nothing found
+.row.justify-content-center
+  = paginate @courses, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

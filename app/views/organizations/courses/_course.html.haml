@@ -1,0 +1,11 @@
+%tr
+  %td= course.name
+  %td= "@#{course.user.nickname}"
+  %td= course_status_badge(course.status)
+  %td= course_visibility_badge(course.visibility)
+  %td= full_time_string(course.created_at)
+  %td= full_time_string(course.updated_at)
+  %td
+    .btn-group
+      = link_to "Show", course_path(course), class: "btn btn-sm btn-outline-primary"
+      = link_to "Edit", edit_course_path(course), class: "btn btn-sm btn-outline-warning"

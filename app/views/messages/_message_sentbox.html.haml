@@ -1,0 +1,14 @@
+.card
+  .card-body
+    %h3
+      To:
+      %em= "@#{messaging_user_attribute(receipt.receiver, :nickname)}"
+      %span= messaging_user_attribute(receipt.receiver, :first_name)
+      %span= messaging_user_attribute(receipt.receiver, :last_name)
+      .float-right
+        - if @receipt.trashed?
+          = link_to "Restore", restore_message_path(receipt), method: :patch, class: 'btn btn-sm btn-outline-info'
+        - else
+          = link_to "Move to trash", message_path(receipt), method: :delete, class: 'btn btn-sm btn-outline-danger'
+    %h6= full_time_string(receipt.created_at)
+    %p= simple_format(receipt.message.body)

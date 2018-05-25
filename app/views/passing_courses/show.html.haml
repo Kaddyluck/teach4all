@@ -1,0 +1,6 @@
+= react_component('passing_course', { name: @course.name, 
+                                      pages: @pages.to_json, 
+                                      active_page: @passing_course.active_page,
+                                      user_answers: @user_answers.to_json, 
+                                      save_progress_course_path: save_progress_course_path,
+                                      check_answers_course_path: check_answers_course_path})

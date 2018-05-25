@@ -1,0 +1,77 @@
+@import '~bootstrap/dist/css/bootstrap';
+@import '~react-draft-wysiwyg/dist/react-draft-wysiwyg';
+@import 'select2/dist/css/select2.css';
+@import 'react-rangeslider/lib/index.css';
+
+
+.close-tab {
+    color: black;
+    display:inline;
+}
+.close-tab:hover {
+    color: rgb(177, 177, 177);
+    cursor: pointer;
+}
+
+.plus:hover {
+    cursor: pointer;
+    color: #b7c5eb;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
+.myWrapper {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+.myEditor {
+    overflow-y: scroll;
+    max-height: 70vh;
+}
+
+.questionForm {
+    width: calc(100% - 1.4em);
+}
+
+.readOnlyEditorToolbar {
+    display: none; 
+}
+
+/**
+* Rangeslider - Horizontal slider
+*/
+.rangeslider-horizontal {
+    margin: 11px 0;
+    height: 10px;
+    border-radius: 2px;
+}
+.rangeslider-horizontal .rangeslider__fill {
+    height: 100%;
+    background-color: #138496;
+    border-radius: 2px;
+    top: 0;
+}
+.rangeslider-horizontal .rangeslider__handle {
+    width: 10px;
+    height: 20px;
+    border-radius: 2px;
+}
+.rangeslider-horizontal .rangeslider__handle:after {
+    display: none;
+}
+
+// Favorites style
+
+.text-warning.favorite-mark:hover {
+    color: #17A2B8!important;
+    cursor: pointer;
+}
+
+.text-info.favorite-mark:hover {
+    color: #FF851B!important;
+    cursor: pointer;
+}

@@ -1,0 +1,18 @@
+- @current_user_passing = course.passing_courses.find_by(user: current_user)
+
+%tr
+  %td= course.name
+  %td= "@#{course.user.nickname}"
+  %td
+    - if course.organization
+      = course.organization.name
+  %td= full_time_string(course.updated_at)
+  %td= course_rating_badge(course.average_rating)
+  %td
+    - if @current_user_passing
+      - if @current_user_passing.status == 'passing'
+        = link_to "Continue", passing_course_path(course), class: "btn btn-block btn-sm btn-outline-success"
+      - else
+        = link_to "To course page", course_path(course), class: "btn btn-sm btn-block btn-outline-info"
+    - else
+      = link_to "Start this course!", course_path(course), class: "btn btn-block btn-sm btn-outline-primary"

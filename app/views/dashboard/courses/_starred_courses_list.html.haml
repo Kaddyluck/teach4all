@@ -1,0 +1,18 @@
+%table.table.table-sm.table-hover
+  %thead
+    %tr.column-titles
+      %th= sortable(:name)
+      %th= sortable(:user, 'Author')
+      %th= sortable(:organization)
+      %th= sortable(:starred_at, 'Starred')
+      %th
+  %tbody
+    - if @starred_courses.any?
+      = render partial: 'starred_course', collection: @starred_courses, as: :course
+    - else
+      %tr
+        %td{colspan: 5}
+          .row.justify-content-center
+            Nothing found
+.row.justify-content-center
+  = paginate @starred_courses, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

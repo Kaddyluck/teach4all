@@ -1,0 +1,8 @@
+%tr
+  %td= course.name
+  %td= "@#{course.user.nickname}"
+  %td
+    - if course.organization
+      = course.organization.name
+  %td= full_time_string(course.favorites.find_by(user: current_user).updated_at)
+  %td= link_to "To course page", course_path(course), class: "btn btn-sm btn-outline-info"

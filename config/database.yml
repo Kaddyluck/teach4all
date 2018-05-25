@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: <%= ENV['TEACH4ALL_DATABASE_USERNAME'] %>
+  password: 12345
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: teach4all_development
+
+test:
+  <<: *default
+  database: teach4all_test
+
+production:
+  <<: *default
+  database: teach4all_production

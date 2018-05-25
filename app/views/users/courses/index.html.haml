@@ -1,0 +1,14 @@
+= render layout: 'dashboard/layout' do
+  %h1
+    My courses
+  - if @courses.any?
+    .float-right
+      = link_to "Create new course", new_course_path, class: "btn btn-outline-success"
+    = render 'dashboard/search_form', url: user_courses_path
+    .user-courses-list
+      = render 'courses_list'
+  - else
+    .row.justify-content-center
+      %h5 You haven't yet created any courses
+    .row.justify-content-center
+      = link_to "Create a new one", new_course_path, class: "btn btn-outline-success"

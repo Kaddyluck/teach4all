@@ -1,0 +1,19 @@
+%h5
+  Sort by
+  %span.ml-3= sortable :course, "course"
+  %span.ml-3= sortable :organization, "organization"
+  %span.ml-3= sortable :created_at, "date"
+
+- if @certificates.any?
+  - if params[:q].present?
+    .row.justify-content-center
+      %h4
+        = pluralize(@certificates.total_count, "certificate")
+        found
+  .card-columns
+    = render @certificates
+- else
+  .row.justify-content-center
+    %h4 Nothing found
+.row.justify-content-center
+  = paginate @certificates, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

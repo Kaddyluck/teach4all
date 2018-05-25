@@ -1,0 +1,45 @@
+.row.justify-content-center
+  .col-sm-10.col-md-8.col-lg-6
+    .card
+      .card-body
+        %h4 Publish course
+        =simple_form_for [:publish, @course], :method => :put do |f|
+          .form-group
+            .row
+              .col-md-4
+                =image_tag @course.avatar.url(:thumb)
+              .col-md-8
+                = f.label :avatar, "Avatar"
+                = f.file_field :avatar
+          -if !@user_orgs.empty?
+            You could own this course personally or choose one of your organizations:
+            = f.association(:organization,
+                            collection: @user_orgs,
+                            label_method: :name,
+                            value_method: :id,
+                            include_blank: true)
+            %hr
+            .form-group
+              =f.input(:visibility,
+                      label: "This course is for ",
+                      collection: [[0, 'all users'], [1, 'organization users'], [2, 'selected users']],
+                      label_method: :second,
+                      value_method: :first,
+                      include_blank: false)
+          - else
+            .form-group
+              =f.input(:visibility,
+                      label: "This course is for ",
+                      collection: [[0, 'all users'], [2, 'selected users']],
+                      label_method: :second,
+                      value_method: :first,
+                      include_blank: false)
+          %hr
+          .form-group
+            = f.label :selected_course_user_ids, "Select users"
+            = f.select(:selected_course_user_ids,
+                        @selected_course_users.collect { |user| [user.nickname, user.id] },
+                        { include_hidden: false },
+                        { multiple: true, class: "select-course-users form-control" })
+          = f.button :submit, 'Publish', class:"btn btn-block btn-secondary btn-sm"
+= javascript_pack_tag 'publish_page'

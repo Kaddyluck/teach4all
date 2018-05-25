@@ -1,0 +1,5 @@
+%tr
+  %td= course.name
+  %td= course.organization.name
+  %td= full_time_string(course.updated_at)
+  %td= link_to "Start this course!", course_path(course), class: "btn btn-sm btn-outline-primary"

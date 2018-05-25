@@ -1,0 +1,25 @@
+.row.justify-content-center
+  .col-md-10
+    .card
+      .card-body
+        .row
+          %h5 Select certificate template for this course (optional) &nbsp
+          =link_to 'Skip>>', @course, class:"btn btn-secondary" 
+        %hr
+        .row
+          .col-md-6.col-lg-6.col-sm-12
+            %h6 You can upload new template
+            .row
+              .col-md-12
+                = simple_form_for @template, url: course_certificate_templates_path do |f|
+                  = f.input :pdf, as: :file, label: false, required: true, input_html: {accept: ('application/pdf') } 
+                  = f.button :submit, class:"btn btn-secondary mt-2"
+          .col-md-6.col-lg-6.col-sm-12
+            .row
+              -@user_templates.each do |t|
+                %span.col-md-6.col-sm-12.card
+                  =image_tag t.pdf.url(:icon), class: "card-img-top"
+                  .card-body
+                    .btn-group
+                      =link_to 'Attach',attach_course_certificate_template_path(@course,t), method: :put, class:"btn btn-secondary "
+                      =link_to 'Delete',course_certificate_template_path(@course,t), method: :delete, class:"btn btn-secondary "

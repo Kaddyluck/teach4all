@@ -1,0 +1,12 @@
+%tr
+  %td= course.name
+  %td
+    - if course.organization
+      = course.organization.name
+  %td= full_time_string(course.updated_at)
+  %td= course_status_badge(course.status)
+  %td
+    .btn-group
+      - if course.published?
+        = link_to "Show", course_path(course), class: "btn btn-sm btn-outline-primary"
+      = link_to "Edit", edit_course_path(course), class: "btn btn-sm btn-outline-warning"

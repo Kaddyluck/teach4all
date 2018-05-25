@@ -1,0 +1,7 @@
+%tr
+  %td= link_to(course.name, course_path(course))
+  %td= course.passing_by_organization_users_percent
+  %td= course.finished_successfully_count
+  %td= course.finished_unsuccessfully_count
+  %td= course.average_rating
+  %td= course.created_at.strftime("%Y-%m-%d")

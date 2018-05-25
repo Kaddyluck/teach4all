@@ -1,0 +1,20 @@
+%table.table.table-sm.table-hover
+  %thead
+    %tr.column-titles
+      %th= sortable(:name)
+      %th= sortable(:user, 'Author')
+      %th= sortable(:organization)
+      %th= sortable(:passed_at, 'Passed')
+      %th= sortable(:result)
+      %th= sortable(:rating, "My rate")
+      %th
+  %tbody
+    - if @passed_courses.any?
+      = render partial: 'passed_course', collection: @passed_courses, as: :course
+    - else
+      %tr
+        %td{colspan: 7}
+          .row.justify-content-center
+            Nothing found
+.row.justify-content-center
+  = paginate @passed_courses, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

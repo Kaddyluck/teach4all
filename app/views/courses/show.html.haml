@@ -1,0 +1,51 @@
+.row
+  .col-lg-6.mx-auto
+    .card
+      .card-body
+        .row
+          .col-md-4
+            = image_tag @course.avatar.url(:medium)
+          .col-md-8.my-auto
+            %h2
+              = @course.name 
+              = render partial: 'shared/favorite_mark', locals: {favorite: @favorite}
+            %smalltext
+              = "#{course_author(@course)}, average rating - #{@course.average_rating}".html_safe
+        %hr
+        %ul.list-group
+          %li.list-group-item.list-group-item-info
+            This course consists from several steps:
+          - @course.pages.each_with_index do |p, i|
+            %li.list-group-item
+              = "#{i+1}. #{p.title}"
+        %br
+        - if @passing_course 
+          - if @passing_course.passing? || @passing_course.need_restart?
+            = link_to 'Continue course!', passing_course_path, class: 'btn btn-outline-info btn-block', role: 'button'
+          - if @passing_course.reviewing?
+            .alert.alert-info{:role => "alert"}
+              %h4.alert-heading Well done!
+              %p Author of the course should manualy check some questions of this course!
+              %hr/
+              %p.mb-0 Wait a little. You'll see results as soon as possible.
+          - if @passing_course.finished_successfully?
+            .alert.alert-success{:role => "alert"}
+              %h4.alert-heading Well done!
+              %p
+                You successfully passed this course!
+                &nbsp&nbsp
+                = link_to 'View certificate', course_certificate_path(@course, user_id: current_user.id), target: "_blank", class: "btn btn-success"
+              %hr/
+              %p.mb-0= "Your result is #{@passing_course.result}% of correct answered questions."
+            = react_component('rating_slider', {rate_course_path: rate_course_path, user_rating: @user_rating})
+            = link_to 'Restart course!', passing_course_path(restart: true), class: 'btn btn-outline-primary btn-block', role: 'button'
+          - if @passing_course.finished_unsuccessfully?
+            .alert.alert-warning{:role => "alert"}
+              %h4.alert-heading Nice try!
+              %p Sorry, but you dont get a 90% of correct answers, try again!
+              %hr/
+              %p.mb-0= "Your result is #{@passing_course.result}% of correct answered questions."
+            = react_component('rating_slider', {rate_course_path: rate_course_path, user_rating: @user_rating})
+            = link_to 'Restart course!', passing_course_path(restart: true), class: 'btn btn-outline-primary btn-block', role: 'button'
+        - else
+          = link_to 'Start course!', passing_course_path, class: 'btn btn-outline-success btn-block', role: 'button'

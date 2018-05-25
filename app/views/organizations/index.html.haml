@@ -1,0 +1,26 @@
+.card
+  .card-body
+    %h1
+      Organizations
+    - if @organizations.any?
+      .float-right
+        = link_to "New organization", new_organization_path, class: "btn btn-block btn-outline-success mb-2"
+      %h6 Search organizations by name
+      = form_tag organizations_path, method: :get, remote: true, class: 'form-inline filtering' do
+        .input-group
+          = text_field_tag :q, params[:q], autocomplete: "off",
+                                           placeholder: "Start typing a word...",
+                                           class: "form-control form-control-sm mb-2"
+          .sorting-hidden-fields
+            = render 'shared/sorting_hidden_fields'
+          .input-group-btn
+            = submit_tag "Search", name: nil, class: "btn btn-sm btn-primary mb-2"
+      #organizations_frame
+        = render "organizations"
+    - else
+      .row.justify-content-center
+        %h5 No organizations
+      .row.justify-content-center
+        = link_to "Create a new one", new_organization_path, class: "btn btn-outline-success"
+= javascript_pack_tag "pagination"
+= javascript_pack_tag "filtering"

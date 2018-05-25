@@ -1,0 +1,17 @@
+%table.table.table-sm.table-hover
+  %thead
+    %tr.column-titles
+      %th= sortable(:name)
+      %th= sortable(:user, 'Author')
+      %th= sortable(:updated_at, 'Published')
+      %th
+  %tbody
+    - if @courses_from_users.any?
+      = render partial: 'from_users_course', collection: @courses_from_users, as: :course
+    - else
+      %tr
+        %td{colspan: 6}
+          .row.justify-content-center
+            Nothing found
+.row.justify-content-center
+  = paginate @courses_from_users, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

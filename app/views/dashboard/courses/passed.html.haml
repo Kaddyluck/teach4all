@@ -1,0 +1,11 @@
+= render layout: 'dashboard/layout' do
+  %h1 Passed courses
+  - if @passed_courses.any?
+    = render 'dashboard/search_form', url: dashboard_courses_passed_path
+    .passed-courses-list
+      = render 'passed_courses_list'
+  - else
+    .row.justify-content-center
+      %h5 No passed courses
+    .row.justify-content-center
+      = link_to "Continue passing courses", dashboard_courses_current_path, class: "btn btn-outline-info"

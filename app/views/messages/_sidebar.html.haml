@@ -1,0 +1,14 @@
+.form-group
+  = link_to "New message", new_message_path, class: "btn btn-success btn-block"
+.list-group
+  = link_to messages_path(box: 'inbox'), class: "list-group-item list-group-item-action #{active_class(messages_path(box: 'inbox'))}" do
+    = fa_icon "inbox"
+    Inbox
+    - if @unread_receipts_count != 0
+      %span.inbox-count.badge.badge-dark= @unread_receipts_count
+  = link_to messages_path(box: 'sentbox'), class: "list-group-item list-group-item-action #{active_class(messages_path(box: 'sentbox'))}" do
+    = fa_icon "envelope"
+    Sent
+  = link_to messages_path(box: 'trashbox'), class: "list-group-item list-group-item-action #{active_class(messages_path(box: 'trashbox'))}" do
+    = fa_icon "trash"
+    Trash

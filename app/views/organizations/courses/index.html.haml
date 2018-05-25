@@ -1,0 +1,14 @@
+= render layout: 'organizations/orgadmin_layout' do
+  .card
+    .card-body
+      %h1 Organization courses
+      - if @courses.any?
+        = render 'dashboard/search_form', url: organization_courses_path(@organization)
+        .courses-list
+          = render 'courses_list'
+      - else
+        .row.justify-content-center
+          %h5 No courses in organization
+        .row.justify-content-center
+          = link_to "Create a new one", new_course_path, class: "btn btn-outline-success"
+

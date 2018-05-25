@@ -1,0 +1,10 @@
+%table.table.table-sm.table-hover
+  %tbody
+    - if @receipts.any?
+      - if current_page?(messages_path(box: 'trashbox'))
+        = link_to "Empty trash", trash_messages_path, method: :delete, data: { confirm: "Are you sure? This action is unreversible!" }
+      = render partial: 'receipt', collection: @receipts
+    - else
+      %h3.text-center #{@box.humanize} empty
+.row.justify-content-center
+  = paginate @receipts, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

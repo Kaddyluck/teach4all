@@ -1,0 +1,11 @@
+= render layout: 'dashboard/layout' do
+  %h1 Starred courses
+  - if @starred_courses.any?
+    = render 'dashboard/search_form', url: dashboard_courses_starred_path
+    .starred-courses-list
+      = render 'starred_courses_list'
+  - else
+    .row.justify-content-center
+      %h5 No starred courses
+    .row.justify-content-center
+      = link_to "Show recommended courses", dashboard_courses_recommended_path, class: "btn btn-outline-info"

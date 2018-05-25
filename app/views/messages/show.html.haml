@@ -1,0 +1,7 @@
+= render layout: 'layout' do
+  - case @receipt.box
+  - when 'inbox'
+    = render 'message_inbox', receipt: @receipt
+  - when 'sentbox'
+    = render 'message_sentbox', receipt: @receipt
+

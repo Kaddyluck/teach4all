@@ -1,0 +1,21 @@
+= render layout: 'dashboard/layout' do
+  %h1
+    My certificates
+  - if @certificates.any?
+    %h6 Search certificates by course name
+    = form_tag user_certificates_path(@user), method: :get, remote: true, class: 'form-inline filtering' do
+      .input-group
+        = text_field_tag :q, params[:q], autocomplete: "off",
+                                         placeholder: "Start typing a word...",
+                                         class: "form-control form-control-sm mb-2"
+        .sorting-hidden-fields
+          = render 'shared/sorting_hidden_fields'
+        .input-group-btn
+          = submit_tag "Search", name: nil, class: "btn btn-sm btn-primary mb-2"
+    .user-certificates-list
+      = render 'certificates_list'
+  - else
+    .row.justify-content-center
+      %h5 You haven't yet received any certificates
+    .row.justify-content-center
+      = link_to "Continue passing courses", dashboard_courses_current_path, class: "btn btn-outline-info"

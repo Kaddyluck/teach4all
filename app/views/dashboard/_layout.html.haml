@@ -1,0 +1,46 @@
+.row
+  .col-lg-12
+    .row
+      .col-lg-3
+        .navbar.navbar-expand-lg.navbar-light.bg-light
+          %button.navbar-toggler{:'type' => "button", :'data-toggle' => "collapse", :'data-target' => "#dashboard_navbar_toggler", :'aria-controls' => "dashboard_navbar_toggler", :'aria-expanded' => false, :'aria-label' => "Toggle navigation"}
+            %span.navbar-toggler-icon
+          .collapse.navbar-collapse#dashboard_navbar_toggler
+            %div
+              = link_to "Dashboard", dashboard_path, class: "navbar-brand"
+              .nav.nav-pills.flex-column
+                = link_to '#collapse_pills', :'data-toggle' => "collapse", :'aria-expanded' => false, :'aria-controls' => "collapse_pills", role: "button", class: "nav-link dropdown-toggle" do
+                  = fa_icon "graduation-cap"
+                  Courses
+                .collapse#collapse_pills{class: dashboard_navbar_show_class}
+                  %div
+                    .nav.nav-pills.flex-column
+                      = link_to dashboard_courses_current_path, class: "nav-link ml-3 my-1 #{active_class(dashboard_courses_current_path)}" do
+                        = fa_icon "tasks"
+                        Current
+                      = link_to dashboard_courses_from_organizations_path, class: "nav-link ml-3 my-1 #{active_class(dashboard_courses_from_organizations_path)}" do
+                        = fa_icon "building"
+                        From organizations
+                      = link_to dashboard_courses_from_users_path, class: "nav-link ml-3 my-1 #{active_class(dashboard_courses_from_users_path)}" do
+                        = fa_icon "users"
+                        From users
+                      = link_to dashboard_courses_starred_path, class: "nav-link ml-3 my-1 #{active_class(dashboard_courses_starred_path)}" do
+                        = fa_icon "star"
+                        Favorite
+                      = link_to dashboard_courses_passed_path, class: "nav-link ml-3 my-1 #{active_class(dashboard_courses_passed_path)}" do
+                        = fa_icon "check-square-o"
+                        Passed
+                      = link_to dashboard_courses_recommended_path, class: "nav-link ml-3 my-1 #{active_class(dashboard_courses_recommended_path)}" do
+                        = fa_icon "thumbs-up"
+                        Recommended
+                = link_to user_courses_path(params[:user_id] || current_user), class: "nav-link #{active_class(user_courses_path(params[:user_id] || current_user))}" do
+                  = fa_icon "user-circle-o"
+                  My Courses
+                = link_to user_certificates_path(params[:user_id] || current_user), class: "nav-link #{active_class(user_certificates_path(params[:user_id] || current_user))}" do
+                  = fa_icon "trophy"
+                  My Сertificates
+      .col-lg-9
+        .card
+          .card-body
+            = yield
+= javascript_pack_tag 'filtering'

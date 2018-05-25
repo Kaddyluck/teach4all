@@ -1,0 +1,30 @@
+= render layout: 'organizations/orgadmin_layout' do
+  .card
+    .card-body
+      %h1
+        Organization Users
+        .float-right
+          = link_to "Add users", add_users_to_organization_path(@organization), class: "btn btn-success"
+
+      = form_tag organization_users_path(@organization), method: :get, remote: true, class: "filtering" do
+        .form-row
+          .form-group.col-lg-2
+            = label_tag :search, "Search by"
+            = select_tag :search, options_for_select(@search_field_options.map { |option| [option.titleize, option] }),
+                                  class: "form-control form-control-sm"
+          .form-group.col-lg-4
+            = label_tag :q, "Search query"
+            = text_field_tag :q, params[:q], autocomplete: "off", placeholder: "Start typing a word...",
+                                             class: "form-control form-control-sm"
+
+          .form-group.col-md-2
+            = label_tag :registered, "Status"
+            = select_tag :registered, options_for_select('-' => '', 'registered' => 'true', 'unregistered' => 'false'),
+                                      class: "form-control form-control-sm"
+        .sorting-hidden-fields
+          = render 'shared/sorting_hidden_fields'
+        = submit_tag "Apply filters", name: nil, class: "btn btn-sm btn-primary"
+        = link_to "Reset filters", organization_users_path(@organization), class: "btn btn-sm btn-secondary"
+
+      .users-list
+        = render 'users_list'

@@ -1,0 +1,7 @@
+= react_component('edit_course', 
+                  {name: @course.name,
+                   save_course_method: "PUT",
+                   save_course_path: course_path(@course),
+                   pages: @pages.to_json,
+                   edit: true,
+                   validate_and_save_course_path: validate_and_save_course_path})

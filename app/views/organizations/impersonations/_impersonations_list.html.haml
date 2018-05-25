@@ -1,0 +1,12 @@
+%table.table.table-sm.table-hover.mt-3
+  %thead
+    %tr.column-titles
+      %th= sortable :target_user
+      %th= sortable :impersonator
+      %th= sortable :created_at, "Started at"
+      %th= sortable :ended_at, "Ended at"
+      %th Duration
+  %tbody
+    = render partial: 'impersonation', collection: @impersonations
+.row.justify-content-center
+  = paginate @impersonations, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

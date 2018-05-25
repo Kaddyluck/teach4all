@@ -1,0 +1,13 @@
+%table.table.table-sm.table-hover
+  %thead
+    %tr.column-titles
+      %th= sortable :name
+      %th= sortable :passing_by_organization_users_percent, "Passing by org. users, %"
+      %th= sortable :finished_successfully_count, "Successfully"
+      %th= sortable :finished_unsuccessfully_count, "Unsuccessfully"
+      %th= sortable :average_rating, "User rating"
+      %th= sortable :created_at
+  %tbody
+    = render partial: 'course', collection: @courses
+.row.justify-content-center
+  = paginate @courses, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

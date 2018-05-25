@@ -1,0 +1,19 @@
+%table.table.table-hover
+  %thead
+  %tr
+    %th{scope:"col"} Email
+    %th{scope:"col"} Nickname
+    %th{scope:"col"} Actions
+  %tbody
+  -users.each do |user|
+    %tr.table-light
+    %th{scope:"row"}
+      = user.email
+    %td
+      = user.nickname
+    %td
+      -if defined? actions
+        = render actions, user: user, organization: organization
+      =link_to 'Exclude', organization_role_path(organization_id:organization.id, user_id:user.id), method: :delete, class: "btn btn-sm btn-outline-danger"
+.row.justify-content-center
+  = paginate users, remote: true, theme: 'twitter-bootstrap-4',pagination_class: "pagination-sm"

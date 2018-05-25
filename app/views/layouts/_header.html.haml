@@ -1,0 +1,45 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
+  = link_to(root_path, class: "navbar-brand py-0") do
+    %img{src: "/logo.png", height: "45"}
+  %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  .collapse.navbar-collapse#navbarNavDropdown
+    - if user_signed_in?
+      = form_tag search_path, method: :get, class: "form-inline" do
+        .input-group
+          = search_field_tag :query, nil, placeholder: "Search courses", autocomplete: "off", class: "form-control", :'aria-describedby' => "basic-addon2"
+          .input-group-btn
+            = submit_tag "Go!", class: "btn btn-secondary"
+    %ul.navbar-nav.ml-auto
+      - if user_signed_in?
+        %li.nav-item.dropdown
+          %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
+            = current_user.nickname
+          .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
+            %h6.dropdown-header Courses:
+            = link_to('Create new course', new_course_path, class: "dropdown-item")
+            = link_to('Review requests', review_requests_path, class: "dropdown-item")
+            .dropdown-divider
+            = link_to "Messages", messages_path, class: "dropdown-item"
+            .dropdown-divider
+            %h6.dropdown-header Profile:
+            = link_to("My profile", user_path(current_user), class: "dropdown-item")
+            = link_to("Edit profile", edit_user_registration_path(current_user), class: "dropdown-item")
+            = link_to("Sign out", destroy_user_session_path, method: :delete, class: "dropdown-item")
+        - if current_user.admin? || current_user.org_admin?
+          %li.nav-item.dropdown
+            %a#navbarDropdownMenuLink.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#"}
+              Administration panel
+            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdownMenuLink"}
+              - if current_user.admin?
+                = link_to('Organizations managment', organizations_path, class: "dropdown-item")
+                .dropdown-divider
+              - current_user.roles.where(role: :org_admin).each do |role|
+                = link_to(role.organization.name, organization_path(role.organization), class: "dropdown-item")
+        - if true_user != current_user
+          %li.nav-item
+            = link_to stop_impersonation_user_path(current_user), method: :delete, "data-toggle": "tooltip", "data-placement": "bottom", title: "Stop impersonation", class: "btn btn-sm btn-warning" do
+              = fa_icon "user-secret lg"
+      - else
+        %li.nav-item
+          = link_to "Sign in", new_user_session_path, class: "nav-link"

@@ -1,0 +1,19 @@
+%table.table.table-sm.table-hover
+  %thead
+    %tr.column-titles
+      %th= sortable(:name)
+      %th= sortable(:user, "Author")
+      %th= sortable(:organization)
+      %th= sortable(:updated_at, 'Published')
+      %th= sortable(:average_rating, 'Rating')
+      %th
+  %tbody
+    - if @recommended_courses.any?
+      = render partial: 'recommended_course', collection: @recommended_courses, as: :course
+    - else
+      %tr
+        %td{colspan: 6}
+          .row.justify-content-center
+            Nothing found
+.row.justify-content-center
+  = paginate @recommended_courses, remote: true, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm"

@@ -1,0 +1,10 @@
+%h6 Search courses by name
+= form_tag url, method: :get, remote: true, class: 'form-inline filtering' do
+  .input-group
+    = text_field_tag :q, params[:q], autocomplete: "off",
+                                     placeholder: "Start typing a word...",
+                                     class: "form-control form-control-sm mb-2"
+    .sorting-hidden-fields
+      = render 'shared/sorting_hidden_fields'
+    .input-group-btn
+      = submit_tag "Search", name: nil, class: "btn btn-sm btn-primary mb-2"

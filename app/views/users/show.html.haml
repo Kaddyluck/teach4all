@@ -1,0 +1,32 @@
+.row
+  .col-sm-12.col-md-5.col-lg-5
+    .card
+      .card-header
+        %b
+          = @user.nickname
+      .card-body
+        .row
+          .col-md-4
+            = image_tag @user.avatar.url(:thumb)
+          .col-md-8
+            %b
+              = "Name:"
+            = "#{@user.first_name} #{@user.last_name}"
+            %hr
+            %b
+              = "Last visit: "
+            = @user.last_sign_in_at
+  .col-sm-12.col-md-7.col-lg-7
+    .card
+      .card-header
+        %b Certificates
+      .card-body
+        .row
+          - if @certificates.empty?
+            .col-md-12
+              There's nothing yet :(
+          -else
+            -@certificates.each do |c|
+              .col-md-6
+                = link_to course_certificate_path(c.course, user_id: @user.id), target: "_blank" do
+                  = image_tag c.pdf.url(:icon)

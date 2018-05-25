@@ -1,0 +1,6 @@
+- if favorite
+  = link_to(remove_from_favorites_course_path, method: :delete) do
+    %span.text-warning.favorite-mark{"data-toggle" => "tooltip", title: "Remove from favorites"} ★
+- else 
+  = link_to(add_to_favorites_course_path, method: :put) do
+    %span.text-info.favorite-mark{"data-toggle" => "tooltip", title: "Add to favorites"} ★

@@ -1,0 +1,27 @@
+= render layout: 'organizations/orgadmin_layout' do
+  .row
+    .col-sm-10.col-md-8.col-lg-5
+      =render 'profile'
+    .col-sm-10.col-md-8.col-lg-7
+      .card
+        .card-header
+          Requests
+          .card-body
+            %table.table.table-hover
+              %thead
+              %tr
+                %th{scope:"col"} Email
+                %th{scope:"col"} Nickname
+                %th{scope:"col"} Actions
+              %tbody
+              -@requests.each do |request|
+                %tr.table-light
+                %th{scope:"row"}
+                  = request.user.email
+                %td
+                  = request.user.nickname
+                %td
+                  = link_to 'Accept', process_request_organization_path(@organization, request_id: request.id, accept:true),
+                      method: :patch, class:"btn btn-sm btn-primary"
+                  = link_to 'Reject', process_request_organization_path(@organization, request_id: request.id, accept:false),
+                      method: :patch, class:"btn btn-sm btn-danger"
